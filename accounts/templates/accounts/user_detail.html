@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+{% load recommended %}
+ 
+{% block content %}
+
+{% block script %}
+<script>
+$(document).ready(function(){
+  loadTweetContainer("tweet-container")
+
+})
+
+</script>
+{% endblock script%}
+
+<div class="row" >
+    <div class="col-sm-3 col-xs-2">
+        <h1>{{ object.username }}</h1>
+        <span>Follower: {{ object.followed_by.count }}</span>
+        <div><a class="btn btn-link" href="{% url 'profiles:follow' username=object.username %}">
+            {% if following  %} UnFollow  {% else %}Follow {% endif %}
+        </a>
+    </div>
+    <h1>Following <small>({{  object.profile.get_following.count }})</small></h1>
+    <!--##前面加/表示相对路径-->
+    {% for user in object.profile.get_following %}
+    <a href="/{{ user.username }}">{{ user.username }}</a><hr/>
+    {% endfor %}
+
+
+    <h1>Followed_by</h1>
+
+    {% for profile in object.followed_by.all %}
+    <a href="/{{ profile.user.username }}">{{ profile.user.username }}</a><br/>
+    {% endfor %}
+    <h1> Recommended</h1>
+    {% recommended request.user %}
+    
+</div>
+
+    <div class="col-sm-9 col-xs-2" >
+        <h1>Tweets</h1>
+
+        <div id="tweet-container" data-url="http://127.0.0.1:8000/api/{{ object.username }}/tweets/">   </div>
+        <a href="#" id="loadmore">load more Tweet</a>
+
+
+    </div>
+
+</div>
+{% endblock content %}

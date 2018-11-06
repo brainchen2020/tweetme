@@ -1,0 +1,66 @@
+<!-- <nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand" href="{% url 'home' %}">Home</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse"
+          data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+          aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  </hr>
+ {% include 'tweets/search_form.html' %}
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav nav navbar-right">
+        {% if request.user.is_authenticated %}
+            <li><a href="{{ request.user.profile.get_absolute_url }}">Profile</a></li>
+            <li role="separator" class="divider"></li>
+            <li><a href="{% url 'logout' %}">Logout</a></li>
+      
+    </ul>
+       {% else %}
+        <ul class="nav navbar-nav navbar-right">
+          <li><a href="{% url 'login' %}">Login</a></li>
+          <li><a href="{% url 'register' %}">Register</a></li>
+        </ul>
+        {% endif %}
+  </div>
+
+</nav> -->
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light nav-right">
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse nav-right" id="navbarNavDropdown">
+    <ul class="navbar-nav nav-right">
+      <li class="nav-item active">
+       <a class="navbar-brand" href="{% url 'home' %}">Home</a>
+      </li>
+      <li class="nav-item">
+         {% include 'tweets/search_form.html' %}
+      </li>
+<!--       <li class="nav-item">
+        <a class="nav-link" href="#">Pricing</a>
+      </li> -->
+     {% if request.user.is_authenticated %}
+      <li class="nav-item dropdown nav-right">
+        <a class="nav-link dropdown-toggle right" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+           Menu
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+          <a class="dropdown-item" href="{{ request.user.profile.get_absolute_url }}">Profile</a>
+          <a class="dropdown-item" href="{% url 'logout' %}">Logout</a>
+        </div>
+      </li>
+      {% else %}
+      <li class="nav-item dropdown nav-right">
+    <!--   <a class="nav-link dropdown-toggle right" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+           Menu
+        </a> -->
+        <div class="navbar-nav nav-right">
+          <a class="dropdown-item" href="{% url 'login' %}">Login</a> 
+          <a class="dropdown-item" href="{% url 'register' %}">Register</a> 
+        </div>
+      </li>
+      {% endif %}
+    </ul>
+  </div>
+</nav>
