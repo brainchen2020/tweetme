@@ -25,7 +25,7 @@ SECRET_KEY = '$ak3=6=*(@8)x!k_v_2eh=m54o@g=!u-ef1=ks-_m+a5e$acvd'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -38,9 +38,9 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
-    'accounts',
-    'crispy_forms',
     'rest_framework',
+    'crispy_forms',
+    'accounts',
     'hashtags',
     'tweets',
 ]
@@ -63,7 +63,7 @@ LOGOUT_REDIRECT_URL = LOGIN_URL
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, "templates")],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -126,8 +126,9 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.10/howto/static-files/
 
-STATIC_URL = '/static/'
-STATIC_ROOT = STATIC_URL
+STATIC_URL = '/some-static/'
 
-
-ALLOWED_HOSTS = ['*']
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, "static-storage"),
+]
+STATIC_ROOT = os.path.join(os.path.dirname(BASE_DIR), "static-serve")
